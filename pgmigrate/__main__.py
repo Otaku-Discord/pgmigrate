@@ -1,15 +1,11 @@
-import os
 import click
-from .migrate import create_migration, apply_migration, apply_all_migrations, initialize_db
+from pgmigrate.migrate import apply_migration, apply_all_migrations, initialize_db
+from pgmigrate.config import config
 
 @click.group(invoke_without_command=False)
 def main():
     pass
 
-@main.command()
-@click.argument('name')
-def create(name):
-    create_migration(name)
 
 @main.command()
 @click.argument('version')
@@ -22,6 +18,6 @@ def apply_all():
 
 if __name__ == "__main__":
     from pathlib import Path
-    Path("./db/migrations").mkdir(parents=True, exist_ok=True)
+    Path(config.migrations_path).mkdir(parents=True, exist_ok=True)
     initialize_db()
     main()
