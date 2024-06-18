@@ -1,3 +1,4 @@
+from operator import itemgetter
 import os
 import psycopg2
 from dotenv import load_dotenv
@@ -9,12 +10,14 @@ load_dotenv()
 
 def get_all_migrations():
     files = os.listdir(config.migrations_path)
-    return tuple(
+    return sorted(
         (
-            int(f.split("__")[0][1:]),
-            f,
-        )
-        for f in files
+            (
+                int(f.split("__")[0][1:]),
+                f,
+            )
+            for f in files
+        ), key=itemgetter(0)
     )
 
 
