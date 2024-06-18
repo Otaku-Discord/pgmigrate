@@ -5,7 +5,6 @@ import click
 from pgmigrate.config import config
 
 load_dotenv()
-DB_URL = os.getenv("DATABASE_URL")
 
 
 def get_all_migrations():
@@ -20,7 +19,7 @@ def get_all_migrations():
 
 
 def get_db_connection():
-    conn = psycopg2.connect(DB_URL)
+    conn = psycopg2.connect(config.url)
     return conn
 
 
