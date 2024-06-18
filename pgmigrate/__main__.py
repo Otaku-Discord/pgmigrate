@@ -22,6 +22,6 @@ def apply_all():
 
 if __name__ == "__main__":
     from pathlib import Path
-    Path("./migrations").mkdir(parents=True, exist_ok=True)
+    Path("./db/migrations").mkdir(parents=True, exist_ok=True)
     initialize_db()
     main()

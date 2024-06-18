@@ -33,7 +33,7 @@ def create_migration(name):
         last_version = cur.fetchone()[0]
         new_version = f"v{last_version + 1}"
         
-    migration_filename = f'migrations/{new_version}_{name}.sql'
+    migration_filename = f'db/migrations/{new_version}_{name}.sql'
     
     with open(migration_filename, 'w') as f:
         f.write("-- Write your SQL migration script here\n")
@@ -64,7 +64,7 @@ def apply_migration(version):
             return
         
         migration_name = result[0]
-        migration_filename = f'migrations/{version}_{migration_name}.sql'
+        migration_filename = f'db/migrations/{version}_{migration_name}.sql'
         
         if not os.path.exists(migration_filename):
             click.echo(f"Migration file {migration_filename} does not exist.")
